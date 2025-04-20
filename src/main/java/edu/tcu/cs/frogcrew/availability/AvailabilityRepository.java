@@ -10,6 +10,6 @@ public interface AvailabilityRepository extends JpaRepository<Availability, Avai
 
     List<Availability> findByUserIdAndGameScheduleId(Integer userId, Integer scheduleId);
 
-    List<Availability> findByUserIdAndGameSeason(Integer userId, String season);
+    List<Availability> findByUserIdAndSeason(Integer userId, String season);
 
 }

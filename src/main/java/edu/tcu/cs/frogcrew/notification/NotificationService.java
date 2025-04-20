@@ -16,6 +16,10 @@ public class NotificationService {
         this.notificationRepository = notificationRepository;
     }
 
+    public Notification findById(Integer notificationId) {
+        return notificationRepository.findById(notificationId).orElseThrow(() -> new ObjectNotFoundException("notification", notificationId));
+    }
+
     public List<Notification> findNotificationsByUserId(Integer userId) {
         return notificationRepository.findByUserId(userId);
     }

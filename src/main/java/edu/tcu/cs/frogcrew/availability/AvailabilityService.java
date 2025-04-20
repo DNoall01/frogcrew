@@ -40,7 +40,7 @@ public class AvailabilityService {
     }
 
     public List<Availability> findByUserIdAndSeason(Integer userId, String season){
-        return this.availabilityRepository.findByUserIdAndGameSeason(userId, season);
+        return this.availabilityRepository.findByUserIdAndSeason(userId, season);
     }
 
 

@@ -3,7 +3,7 @@ package edu.tcu.cs.frogcrew.game;
 import edu.tcu.cs.frogcrew.schedule.Schedule;
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -19,7 +19,7 @@ public class Game {
 
     private String sport;
 
-    private Date gameDate;
+    private LocalDate gameDate;
 
     private String venue;
 
@@ -58,11 +58,11 @@ public class Game {
         this.sport = sport;
     }
 
-    public Date getGameDate() {
+    public LocalDate getGameDate() {
         return gameDate;
     }
 
-    public void setGameDate(Date gameDate) {
+    public void setGameDate(LocalDate gameDate) {
         this.gameDate = gameDate;
     }
 

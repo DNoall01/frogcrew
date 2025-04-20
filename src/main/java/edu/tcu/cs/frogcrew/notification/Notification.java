@@ -10,11 +10,9 @@ public class Notification {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Integer notificationId;
 
-    private String title;
-
-    private String content;
+    private String message;
 
     private LocalDateTime date;
 
@@ -22,32 +20,24 @@ public class Notification {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    private boolean isRead = false;
+    private boolean read = false;
 
     public void viewNotifications() {}
 
-    public int getId() {
-        return id;
+    public Integer getNotificationId() {
+        return notificationId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setNotificationId(Integer notificationId) {
+        this.notificationId = notificationId;
     }
 
-    public String getTitle() {
-        return title;
+    public String getMessage() {
+        return message;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public LocalDateTime getDate() {
@@ -59,11 +49,11 @@ public class Notification {
     }
 
     public boolean isRead() {
-        return isRead;
+        return read;
     }
 
     public void setRead(boolean read) {
-        isRead = read;
+        this.read = read;
     }
 
     public User getUser() {
