@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 public class TradeBoardDtoToTradeBoardConverter implements Converter<TradeBoardDto, TradeBoard> {
 
     //private final UserService userService;
+    // private final
     private final GameService gameService;
     private final PositionService positionService;
 
