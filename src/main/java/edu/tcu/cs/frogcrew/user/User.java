@@ -12,7 +12,7 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Integer id;
 
     @NotEmpty(message = "email is required.")
     private String email;
@@ -20,7 +20,7 @@ public class User implements Serializable {
     @NotEmpty(message = "password is required.")
     private String password;
 
-    private int phoneNumber;
+    private Integer phoneNumber;
 
     private String firstName;
 
@@ -33,27 +33,48 @@ public class User implements Serializable {
 
     private String payRate;
 
-    public int getId() {
+
+    public void register() {
+    }
+
+    public void login() {
+
+    }
+
+    public void invite() {
+
+    }
+
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getEmail() {
+    public @NotEmpty(message = "email is required.") String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(@NotEmpty(message = "email is required.") String email) {
         this.email = email;
     }
 
-    public int getPhoneNumber() {
+    public @NotEmpty(message = "password is required.") String getPassword() {
+        return password;
+    }
+
+    public void setPassword(@NotEmpty(message = "password is required.") String password) {
+        this.password = password;
+    }
+
+    public Integer getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(Integer phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -73,11 +94,11 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
@@ -96,16 +117,4 @@ public class User implements Serializable {
     public void setPayRate(String payRate) {
         this.payRate = payRate;
     }
-
-    public void register() {
-    }
-
-    public void login() {
-
-    }
-
-    public void invite() {
-
-    }
-
 }
