@@ -36,12 +36,18 @@ public class TradeBoardService {
         return tradeBoardRepository.save(trade);
     }
 
-    public TradeBoard approveShiftSwap(Integer tradeId, TradeBoardDto tradeBoardDto) {
-        return null;
+    public TradeBoard approveShiftSwap(Integer tradeId) {
+        TradeBoard tradeBoard = this.tradeBoardRepository.findById(tradeId).orElseThrow(() -> new ObjectNotFoundException("trade board", tradeId));
+        if (!"awaiting approval".equalsIgnoreCase(tradeBoard.getStatus())) throw new IllegalArgumentException("Cannot approve trade not currently awaiting approval.");
+        tradeBoard.setStatus("approved");
+        return tradeBoardRepository.save(tradeBoard);
     }
 
-    public TradeBoard rejectShiftSwap(Integer tradeId, TradeBoardDto tradeBoardDto) {
-        return null;
+    public TradeBoard rejectShiftSwap(Integer tradeId) {
+        TradeBoard tradeBoard = this.tradeBoardRepository.findById(tradeId).orElseThrow(() -> new ObjectNotFoundException("trade board", tradeId));
+        if (!"awaiting approval".equalsIgnoreCase(tradeBoard.getStatus())) throw new IllegalArgumentException("Cannot reject trade not currently awaiting approval.");
+        tradeBoard.setStatus("rejected");
+        return tradeBoardRepository.save(tradeBoard);
     }
 
     public List<TradeBoard> findAll() {

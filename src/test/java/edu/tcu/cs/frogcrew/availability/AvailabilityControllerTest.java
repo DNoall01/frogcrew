@@ -20,8 +20,6 @@ public class AvailabilityControllerTest {
     @MockitoBean
     AvailabilityService availabilityService;
 
-    @
-
 
 
 }
