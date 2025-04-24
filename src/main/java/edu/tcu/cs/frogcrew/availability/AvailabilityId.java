@@ -1,11 +1,17 @@
 package edu.tcu.cs.frogcrew.availability;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@Embeddable
 public class AvailabilityId implements Serializable {
 
+    @Column(name = "user_id")
     private Integer userId;
+    @Column(name = "game_id")
     private Integer gameId;
 
     public AvailabilityId() {}

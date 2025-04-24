@@ -2,7 +2,7 @@ package edu.tcu.cs.frogcrew.tradeboard;
 
 import edu.tcu.cs.frogcrew.game.Game;
 import edu.tcu.cs.frogcrew.position.Position;
-import edu.tcu.cs.frogcrew.user.User;
+import edu.tcu.cs.frogcrew.user.FrogCrewUser;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,11 +14,11 @@ public class TradeBoard {
 
     @ManyToOne
     @JoinColumn(name = "dropper_id", nullable = false)
-    private User dropper;
+    private FrogCrewUser dropper;
 
     @ManyToOne
     @JoinColumn(name = "receiver_id", nullable = false)
-    private User receiver;
+    private FrogCrewUser receiver;
 
     @ManyToOne
     @JoinColumn(name = "gameid", nullable = false)
@@ -38,19 +38,19 @@ public class TradeBoard {
         this.tradeId = tradeId;
     }
 
-    public User getDropper() {
+    public FrogCrewUser getDropper() {
         return dropper;
     }
 
-    public void setDropper(User dropper) {
+    public void setDropper(FrogCrewUser dropper) {
         this.dropper = dropper;
     }
 
-    public User getReceiver() {
+    public FrogCrewUser getReceiver() {
         return receiver;
     }
 
-    public void setReceiver(User receiver) {
+    public void setReceiver(FrogCrewUser receiver) {
         this.receiver = receiver;
     }
 

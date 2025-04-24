@@ -8,8 +8,8 @@ import java.util.List;
 @Repository
 public interface AvailabilityRepository extends JpaRepository<Availability, AvailabilityId> {
 
-    List<Availability> findByUserIdAndGameScheduleId(Integer userId, Integer scheduleId);
+    List<Availability> findByFrogCrewUserIdAndGame_Schedule_Id(Integer userId, Integer scheduleId);
 
-    List<Availability> findByUserIdAndSeason(Integer userId, String season);
+    List<Availability> findByFrogCrewUserIdAndGame_Schedule_Season(Integer userId, String season);
 
 }

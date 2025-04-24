@@ -21,7 +21,7 @@ public class NotificationService {
     }
 
     public List<Notification> findNotificationsByUserId(Integer userId) {
-        return notificationRepository.findByUserId(userId);
+        return notificationRepository.findByFrogCrewUserId(userId);
     }
 
     public Notification markAsRead(Integer notificationId) {

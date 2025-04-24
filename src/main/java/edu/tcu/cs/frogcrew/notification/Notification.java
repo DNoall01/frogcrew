@@ -1,6 +1,6 @@
 package edu.tcu.cs.frogcrew.notification;
 
-import edu.tcu.cs.frogcrew.user.User;
+import edu.tcu.cs.frogcrew.user.FrogCrewUser;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -18,7 +18,7 @@ public class Notification {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private FrogCrewUser frogCrewUser;
 
     private boolean read = false;
 
@@ -56,11 +56,11 @@ public class Notification {
         this.read = read;
     }
 
-    public User getUser() {
-        return user;
+    public FrogCrewUser getUser() {
+        return frogCrewUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(FrogCrewUser frogCrewUser) {
+        this.frogCrewUser = frogCrewUser;
     }
 }

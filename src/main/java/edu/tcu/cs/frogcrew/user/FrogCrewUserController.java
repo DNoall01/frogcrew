@@ -3,5 +3,5 @@ package edu.tcu.cs.frogcrew.user;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class UserController {
+public class FrogCrewUserController {
 }

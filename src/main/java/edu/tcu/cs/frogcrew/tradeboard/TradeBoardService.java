@@ -2,9 +2,8 @@ package edu.tcu.cs.frogcrew.tradeboard;
 
 import edu.tcu.cs.frogcrew.game.Game;
 import edu.tcu.cs.frogcrew.system.exception.ObjectNotFoundException;
-import edu.tcu.cs.frogcrew.tradeboard.dto.TradeBoardDto;
-import edu.tcu.cs.frogcrew.user.User;
-import edu.tcu.cs.frogcrew.user.UserRepository;
+import edu.tcu.cs.frogcrew.user.FrogCrewUser;
+import edu.tcu.cs.frogcrew.user.FrogCrewUserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +14,9 @@ import java.util.List;
 public class TradeBoardService {
 
     private final TradeBoardRepository tradeBoardRepository;
-    private final UserRepository userRepository;
+    private final FrogCrewUserRepository userRepository;
 
-    public TradeBoardService(TradeBoardRepository tradeBoardRepository, UserRepository userRepository) {
+    public TradeBoardService(TradeBoardRepository tradeBoardRepository, FrogCrewUserRepository userRepository) {
         this.tradeBoardRepository = tradeBoardRepository;
         this.userRepository = userRepository;
     }
@@ -28,7 +27,7 @@ public class TradeBoardService {
 
     public TradeBoard requestPickupGame(Integer tradeId, Integer userId) {
         TradeBoard trade = tradeBoardRepository.findById(tradeId).orElseThrow(() -> new ObjectNotFoundException("trade board", tradeId));
-        User user = userRepository.findById(userId).orElseThrow(() -> new ObjectNotFoundException("user", userId));
+        FrogCrewUser user = userRepository.findById(userId).orElseThrow(() -> new ObjectNotFoundException("user", userId));
 
         if (trade.getDropper().getId().equals(user.getId())) throw new IllegalArgumentException("User cannot pick up their own trade");
         trade.setReceiver(user);

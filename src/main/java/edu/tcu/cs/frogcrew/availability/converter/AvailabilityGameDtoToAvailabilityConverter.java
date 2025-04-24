@@ -2,26 +2,26 @@ package edu.tcu.cs.frogcrew.availability.converter;
 
 import edu.tcu.cs.frogcrew.availability.Availability;
 import edu.tcu.cs.frogcrew.availability.AvailabilityId;
-import edu.tcu.cs.frogcrew.availability.dto.AvailabilityDto;
+import edu.tcu.cs.frogcrew.availability.dto.AvailabilityGameDto;
 import edu.tcu.cs.frogcrew.game.GameRepository;
 import edu.tcu.cs.frogcrew.system.exception.ObjectNotFoundException;
-import edu.tcu.cs.frogcrew.user.UserRepository;
+import edu.tcu.cs.frogcrew.user.FrogCrewUserRepository;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AvailabilityDtoToAvailabilityConverter implements Converter<AvailabilityDto, Availability> {
+public class AvailabilityGameDtoToAvailabilityConverter implements Converter<AvailabilityGameDto, Availability> {
 
-    private final UserRepository userRepository;
+    private final FrogCrewUserRepository userRepository;
     private final GameRepository gameRepository;
 
-    public AvailabilityDtoToAvailabilityConverter(UserRepository userRepository, GameRepository gameRepository) {
+    public AvailabilityGameDtoToAvailabilityConverter(FrogCrewUserRepository userRepository, GameRepository gameRepository) {
         this.userRepository = userRepository;
         this.gameRepository = gameRepository;
     }
 
     @Override
-    public Availability convert(AvailabilityDto source) {
+    public Availability convert(AvailabilityGameDto source) {
         Availability availability = new Availability();
         availability.setId(new AvailabilityId(source.userId(), source.gameId()));
         availability.setUser(userRepository.findById(source.userId()).orElseThrow(() -> new ObjectNotFoundException("user", source.userId())));

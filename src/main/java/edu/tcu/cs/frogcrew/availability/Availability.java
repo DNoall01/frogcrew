@@ -1,7 +1,8 @@
 package edu.tcu.cs.frogcrew.availability;
 
 import edu.tcu.cs.frogcrew.game.Game;
-import edu.tcu.cs.frogcrew.user.User;
+import edu.tcu.cs.frogcrew.schedule.Schedule;
+import edu.tcu.cs.frogcrew.user.FrogCrewUser;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,7 +14,7 @@ public class Availability {
     @ManyToOne
     @MapsId("userId") // maps to userId in embeddedId
     @JoinColumn(name = "user_id")
-    private User user;
+    private FrogCrewUser frogCrewUser;
 
     @ManyToOne
     @MapsId("gameId") // maps to gameId in embeddedId
@@ -37,12 +38,12 @@ public class Availability {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public FrogCrewUser getUser() {
+        return frogCrewUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(FrogCrewUser frogCrewUser) {
+        this.frogCrewUser = frogCrewUser;
     }
 
     public Game getGame() {

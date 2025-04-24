@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class User implements Serializable {
+public class FrogCrewUser implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,6 +26,7 @@ public class User implements Serializable {
 
     private String lastName;
 
+    @NotEmpty(message = "roles are required.")
     private Role role;
 
     @ElementCollection
