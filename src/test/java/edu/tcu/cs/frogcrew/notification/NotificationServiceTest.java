@@ -2,6 +2,7 @@ package edu.tcu.cs.frogcrew.notification;
 
 import edu.tcu.cs.frogcrew.system.exception.ObjectNotFoundException;
 import edu.tcu.cs.frogcrew.user.FrogCrewUser;
+import edu.tcu.cs.frogcrew.user.FrogCrewUserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,6 +27,9 @@ public class NotificationServiceTest {
 
     @Mock
     NotificationRepository notificationRepository;
+
+    @Mock
+    FrogCrewUserRepository frogCrewUserRepository;
 
     @InjectMocks
     NotificationService notificationService;

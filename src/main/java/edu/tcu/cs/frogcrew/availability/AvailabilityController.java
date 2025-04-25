@@ -36,8 +36,9 @@ public class AvailabilityController {
         return new Result(true, StatusCode.SUCCESS, "Add Success", savedAvailabilityDto);
     }
 
-    @PutMapping("/{availabilityId}")
-    public Result updateAvailability(@PathVariable AvailabilityId availabilityId, @Valid @RequestBody AvailabilityGameDto availabilityDto) {
+    @PutMapping("")
+    public Result updateAvailability(@Valid @RequestBody AvailabilityGameDto availabilityDto) {
+        AvailabilityId availabilityId = new AvailabilityId(availabilityDto.userId(), availabilityDto.gameId());
         Availability update = this.availabilityGameDtoToAvailabilityConverter.convert(availabilityDto);
         Availability updatedAvailability = this.availabilityService.update(update, availabilityId);
         AvailabilityGameDto savedAvailabilityDto = this.availabilityToAvailabilityGameDtoConverter.convert(updatedAvailability);

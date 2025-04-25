@@ -24,7 +24,6 @@ public class NotificationService {
     }
 
     public List<Notification> findNotificationsByUserId(Integer userId) {
-        this.frogCrewUserRepository.findById(userId).orElseThrow(() -> new ObjectNotFoundException("user", userId));
         return notificationRepository.findByFrogCrewUserId(userId);
     }
 
