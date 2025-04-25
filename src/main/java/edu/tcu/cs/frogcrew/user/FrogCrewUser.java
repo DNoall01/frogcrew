@@ -3,6 +3,7 @@ package edu.tcu.cs.frogcrew.user;
 import edu.tcu.cs.frogcrew.system.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.util.List;
@@ -26,7 +27,7 @@ public class FrogCrewUser implements Serializable {
 
     private String lastName;
 
-    @NotEmpty(message = "roles are required.")
+    @NotNull(message = "roles are required.")
     private Role role;
 
     @ElementCollection

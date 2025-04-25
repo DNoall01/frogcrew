@@ -1,6 +1,7 @@
 package edu.tcu.cs.frogcrew.notification;
 
 import edu.tcu.cs.frogcrew.system.exception.ObjectNotFoundException;
+import edu.tcu.cs.frogcrew.user.FrogCrewUserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +12,11 @@ import java.util.List;
 public class NotificationService {
 
     private final NotificationRepository notificationRepository;
+    private final FrogCrewUserRepository frogCrewUserRepository;
 
-    public NotificationService(NotificationRepository notificationRepository) {
+    public NotificationService(NotificationRepository notificationRepository, FrogCrewUserRepository frogCrewUserRepository) {
         this.notificationRepository = notificationRepository;
+        this.frogCrewUserRepository = frogCrewUserRepository;
     }
 
     public Notification findById(Integer notificationId) {
@@ -21,6 +24,7 @@ public class NotificationService {
     }
 
     public List<Notification> findNotificationsByUserId(Integer userId) {
+        this.frogCrewUserRepository.findById(userId).orElseThrow(() -> new ObjectNotFoundException("user", userId));
         return notificationRepository.findByFrogCrewUserId(userId);
     }
 
