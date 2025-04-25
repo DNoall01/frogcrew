@@ -1,5 +1,6 @@
 package edu.tcu.cs.frogcrew.position;
 
+import edu.tcu.cs.frogcrew.system.exception.ObjectNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -30,8 +31,9 @@ public class PositionService {
         return this.positionRepository.findById(positionId)
                 .map(oldPosition -> {
                     oldPosition.setPositionName(update.getPositionName());
+                    oldPosition.setPositionLocation(update.getPositionLocation());
                     return positionRepository.save(oldPosition);
-                }).orElseThrow(() -> new RuntimeException("Position not found"));
+                }).orElseThrow(() -> new ObjectNotFoundException("position", positionId));
     }
 
     public Position findByPositionName(String positionName) {

@@ -1,11 +1,15 @@
 package edu.tcu.cs.frogcrew.game;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.tcu.cs.frogcrew.game.dto.GameDto;
 import edu.tcu.cs.frogcrew.schedule.Schedule;
+import edu.tcu.cs.frogcrew.schedule.ScheduleRepository;
 import edu.tcu.cs.frogcrew.system.StatusCode;
+import edu.tcu.cs.frogcrew.system.exception.ObjectNotFoundException;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -13,6 +17,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -22,6 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
@@ -32,6 +39,9 @@ public class GameControllerTest {
 
     @MockitoBean
     GameService gameService;
+
+    @MockitoBean
+    ScheduleRepository scheduleRepository;
 
     @Autowired
     ObjectMapper objectMapper;
@@ -110,10 +120,28 @@ public class GameControllerTest {
     }
 
     @Test
-    void testFindGameByIdSuccess() throws Exception {}
+    void testFindGameByIdSuccess() throws Exception {
+        given(this.gameService.findById(102)).willReturn(this.games.get(1));
+
+        this.mockMvc.perform(get(this.baseUrl + "/gameSchedule/game/102").accept(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.flag").value(true))
+                .andExpect(jsonPath("$.code").value(StatusCode.SUCCESS))
+                .andExpect(jsonPath("$.message").value("Find Success"))
+                .andExpect(jsonPath("$.data.gameId").value(102))
+                .andExpect(jsonPath("$.data.venue").value("Amon G. Carter Stadium"))
+                .andExpect(jsonPath("$.data.opponent").value("Baylor Bears"));
+    }
 
     @Test
-    void testFindGameByIdNotFound() throws Exception {}
+    void testFindGameByIdNotFound() throws Exception {
+        given(this.gameService.findById(110)).willThrow(new ObjectNotFoundException("game", 110));
+
+        this.mockMvc.perform(get(this.baseUrl + "/gameSchedule/game/110").accept(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.flag").value(false))
+                .andExpect(jsonPath("$.code").value(StatusCode.NOT_FOUND))
+                .andExpect(jsonPath("$.message").value("Could not find game with id 110"))
+                .andExpect(jsonPath("$.data").isEmpty());
+    }
 
     @Test
     void testFindAllGamesSuccess() throws Exception {
@@ -131,9 +159,58 @@ public class GameControllerTest {
     }
 
     @Test
-    void testUpdateGameSuccess() throws Exception {}
+    void testUpdateGameSuccess() throws Exception {
+
+        Schedule s1 = new Schedule();
+        s1.setId(1);
+
+        GameDto newGameDto = new GameDto(106,
+                1,
+                LocalDate.of(2025, 2, 20),
+                "Home",
+                "New School",
+                false
+        );
+
+        String json = this.objectMapper.writeValueAsString(newGameDto);
+
+        Game updatedGame = new Game();
+        updatedGame.setGameId(102);
+        updatedGame.setSchedule(s1);
+        updatedGame.setGameDate(LocalDate.of(2025, 10, 5));
+        updatedGame.setVenue("Amon G. Carter Stadium");
+        updatedGame.setOpponent("Baylor Bears");
+        updatedGame.setFinalized(false);
+
+        given(this.gameService.update(eq(102), Mockito.any(Game.class))).willReturn(updatedGame);
+        given(scheduleRepository.findById(1)).willReturn(Optional.of(s1));
+
+        this.mockMvc.perform(put(this.baseUrl + "/gameSchedule/game/102").contentType(MediaType.APPLICATION_JSON).content(json).accept(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.flag").value(true))
+                .andExpect(jsonPath("$.code").value(StatusCode.SUCCESS))
+                .andExpect(jsonPath("$.message").value("Update Success"))
+                .andExpect(jsonPath("$.data.gameId").value(updatedGame.getGameId()))
+                .andExpect(jsonPath("$.data.venue").value(updatedGame.getVenue()))
+                .andExpect(jsonPath("$.data.opponent").value(updatedGame.getOpponent()))
+                .andExpect(jsonPath("$.data.finalized").value(updatedGame.isFinalized()));
+
+    }
 
     @Test
-    void testFindGamesByScheduleIdSuccess() throws Exception {}
+    void testFindGamesByScheduleIdSuccess() throws Exception {
+        given(this.gameService.findGamesByScheduleId(1)).willReturn(this.games);
+
+        this.mockMvc.perform(get(this.baseUrl + "/gameSchedule/1/games").accept(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.flag").value(true))
+                .andExpect(jsonPath("$.code").value(StatusCode.SUCCESS))
+                .andExpect(jsonPath("$.message").value("Find Success"))
+                .andExpect(jsonPath("$.data").value(Matchers.hasSize(this.games.size())))
+                .andExpect(jsonPath("$.data[0].gameId").value(101))
+                .andExpect(jsonPath("$.data[0].opponent").value("Oklahoma Sooners"))
+                .andExpect(jsonPath("$.data[1].gameId").value(102))
+                .andExpect(jsonPath("$.data[1].opponent").value("Baylor Bears"));
+
+
+    }
 
 }

@@ -24,7 +24,7 @@ public class GameDtoToGameConverter implements Converter<GameDto, Game> {
         game.setGameDate(source.gameDate());
         game.setVenue(source.venue());
         game.setOpponent(source.opponent());
-        game.setFinalized(source.isFinalized());
+        game.setFinalized(source.finalized());
         return game;
     }
 }

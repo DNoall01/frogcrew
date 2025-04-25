@@ -25,7 +25,7 @@ public class Game {
 
     private String opponent;
 
-    private boolean isFinalized = false;
+    private boolean finalized = false;
 
     @ElementCollection
     private List<String> openPositions;
@@ -91,10 +91,10 @@ public class Game {
     }
 
     public boolean isFinalized() {
-        return isFinalized;
+        return finalized;
     }
 
     public void setFinalized(boolean finalized) {
-        isFinalized = finalized;
+        this.finalized = finalized;
     }
 }
