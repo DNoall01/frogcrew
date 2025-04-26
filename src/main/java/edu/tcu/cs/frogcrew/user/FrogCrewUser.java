@@ -1,5 +1,6 @@
 package edu.tcu.cs.frogcrew.user;
 
+import edu.tcu.cs.frogcrew.availability.Availability;
 import edu.tcu.cs.frogcrew.system.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
@@ -13,7 +14,7 @@ public class FrogCrewUser implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Integer userId;
 
     @NotEmpty(message = "email is required.")
     private String email;
@@ -35,6 +36,9 @@ public class FrogCrewUser implements Serializable {
 
     private String payRate;
 
+    @ManyToOne
+    private Availability availability;
+
 
     public void register() {
     }
@@ -49,11 +53,11 @@ public class FrogCrewUser implements Serializable {
 
 
     public Integer getId() {
-        return id;
+        return userId;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.userId = id;
     }
 
     public @NotEmpty(message = "email is required.") String getEmail() {

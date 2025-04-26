@@ -24,6 +24,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -72,7 +74,7 @@ public class GameControllerTest {
         g1 = new Game();
         g1.setGameId(101);
         g1.setSport("Football");
-        g1.setGameDate(LocalDate.of(2025, 9, 21));
+        g1.setGameDate(LocalDateTime.of(LocalDate.of(2025, 9, 21), LocalTime.of(12, 0)));
         g1.setVenue("Amon G. Carter Stadium");
         g1.setOpponent("Oklahoma Sooners");
         g1.setSchedule(s1);
@@ -82,7 +84,7 @@ public class GameControllerTest {
         g2 = new Game();
         g2.setGameId(102);
         g2.setSport("Football");
-        g2.setGameDate(LocalDate.of(2025, 10, 5));
+        g2.setGameDate(LocalDateTime.of(LocalDate.of(2025, 10, 5), LocalTime.of(12, 0)));
         g2.setVenue("Amon G. Carter Stadium");
         g2.setOpponent("Baylor Bears");
         g2.setSchedule(s1);
@@ -92,7 +94,7 @@ public class GameControllerTest {
         g3 = new Game();
         g3.setGameId(103);
         g3.setSport("Basketball");
-        g3.setGameDate(LocalDate.of(2025, 12, 1));
+        g3.setGameDate(LocalDateTime.of(LocalDate.of(2025, 12, 1), LocalTime.of(12, 0)));
         g3.setVenue("Schollmaier Arena");
         g3.setOpponent("Kansas Jayhawks");
         g3.setSchedule(s2);
@@ -102,7 +104,7 @@ public class GameControllerTest {
         g4 = new Game();
         g4.setGameId(104);
         g4.setSport("Basketball");
-        g4.setGameDate(LocalDate.of(2025, 12, 15));
+        g4.setGameDate(LocalDateTime.of(LocalDate.of(2025, 12, 15), LocalTime.of(12, 0)));
         g4.setVenue("Schollmaier Arena");
         g4.setOpponent("Texas Tech");
         g4.setSchedule(s2);
@@ -164,7 +166,7 @@ public class GameControllerTest {
 
         GameDto newGameDto = new GameDto(106,
                 1,
-                LocalDate.of(2025, 2, 20),
+                LocalDateTime.of(LocalDate.of(2025, 2, 20), LocalTime.of(12, 0)),
                 "Home",
                 "New School",
                 false
@@ -175,7 +177,7 @@ public class GameControllerTest {
         Game updatedGame = new Game();
         updatedGame.setGameId(102);
         updatedGame.setSchedule(s1);
-        updatedGame.setGameDate(LocalDate.of(2025, 10, 5));
+        updatedGame.setGameDate(LocalDateTime.of(LocalDate.of(2025, 10, 5), LocalTime.of(12, 0)));
         updatedGame.setVenue("Amon G. Carter Stadium");
         updatedGame.setOpponent("Baylor Bears");
         updatedGame.setFinalized(false);

@@ -23,6 +23,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -72,7 +74,7 @@ public class AvailabilityServiceTest {
         game.setGameId(1);
         game.setSchedule(schedule);
         game.setSport("Basketball");
-        game.setGameDate(LocalDate.of(2025, 5, 15));
+        game.setGameDate(LocalDateTime.of(LocalDate.of(2025, 5, 15), LocalTime.of(12, 0)));
         game.setVenue("Sports Arena");
         game.setOpponent("Team A");
         game.setOpenPositions(Arrays.asList("Coach", "Ref"));
@@ -145,7 +147,7 @@ public class AvailabilityServiceTest {
         game.setGameId(1);
         game.setSchedule(schedule);
         game.setSport("Basketball");
-        game.setGameDate(LocalDate.of(2025, 5, 15));
+        game.setGameDate(LocalDateTime.of(LocalDate.of(2025, 5, 15), LocalTime.of(12, 0)));
         game.setVenue("Sports Arena");
         game.setOpponent("Team A");
         game.setOpenPositions(Arrays.asList("Coach", "Ref"));

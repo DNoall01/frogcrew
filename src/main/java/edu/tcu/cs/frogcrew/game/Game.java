@@ -1,9 +1,10 @@
 package edu.tcu.cs.frogcrew.game;
 
+import edu.tcu.cs.frogcrew.creweduser.CrewedUser;
 import edu.tcu.cs.frogcrew.schedule.Schedule;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -19,7 +20,7 @@ public class Game {
 
     private String sport;
 
-    private LocalDate gameDate;
+    private LocalDateTime gameDate;
 
     private String venue;
 
@@ -31,8 +32,8 @@ public class Game {
     private List<String> openPositions;
 
 
-    //@OneToMany
-    //private List<CrewMember> crewMembers;
+    @OneToMany
+    private List<CrewedUser> crewMembers;
 
     public int getGameId() {
         return gameId;
@@ -58,11 +59,11 @@ public class Game {
         this.sport = sport;
     }
 
-    public LocalDate getGameDate() {
+    public LocalDateTime getGameDate() {
         return gameDate;
     }
 
-    public void setGameDate(LocalDate gameDate) {
+    public void setGameDate(LocalDateTime gameDate) {
         this.gameDate = gameDate;
     }
 
@@ -96,5 +97,13 @@ public class Game {
 
     public void setFinalized(boolean finalized) {
         this.finalized = finalized;
+    }
+
+    public List<CrewedUser> getCrewMembers() {
+        return crewMembers;
+    }
+
+    public void setCrewMembers(List<CrewedUser> crewMembers) {
+        this.crewMembers = crewMembers;
     }
 }
