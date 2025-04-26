@@ -7,10 +7,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,7 +49,7 @@ public class GameServiceTest {
         g1.setGameId(101);
         g1.setSchedule(s1);
         g1.setSport("Football");
-        g1.setGameDate(LocalDate.of(2025, 10, 10));
+        g1.setGameDateTime(LocalDateTime.of(LocalDate.of(2025, 10, 10), LocalTime.of(12, 0)));
         g1.setVenue("Amon G. Carter Stadium");
         g1.setOpponent("Texas Longhorns");
         g1.setFinalized(true);
@@ -59,7 +60,7 @@ public class GameServiceTest {
         g2.setGameId(102);
         g2.setSchedule(s1);
         g2.setSport("Football");
-        g2.setGameDate(LocalDate.of(2025, 10, 17));
+        g2.setGameDateTime(LocalDateTime.of(LocalDate.of(2025, 10, 17), LocalTime.of(12, 0)));
         g2.setVenue("Amon G. Carter Stadium");
         g2.setOpponent("Oklahoma Sooners");
         g2.setFinalized(false);
@@ -108,7 +109,7 @@ public class GameServiceTest {
     @Test
     void testUpdateSuccess() {
         Game update = new Game();
-        update.setGameDate(LocalDate.of(2025, 11, 15));
+        update.setGameDateTime(LocalDateTime.of(LocalDate.of(2025, 11, 15), LocalTime.of(12, 0)));
         update.setSport("Football");
         update.setVenue("Amon G. Carter Stadium");
         update.setOpponent("Cleveland Browns");

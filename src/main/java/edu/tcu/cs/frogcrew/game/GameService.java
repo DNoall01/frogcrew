@@ -29,7 +29,7 @@ public class GameService {
     public Game update(Integer gameId, Game game) {
         return this.gameRepository.findById(gameId)
                 .map(oldGame -> {
-                    oldGame.setGameDate(game.getGameDate());
+                    oldGame.setGameDateTime(game.getGameDateTime());
                     oldGame.setVenue(game.getVenue());
                     oldGame.setOpponent(game.getOpponent());
                     return this.gameRepository.save(oldGame);

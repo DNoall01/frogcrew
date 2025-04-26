@@ -21,7 +21,7 @@ public class GameDtoToGameConverter implements Converter<GameDto, Game> {
         Game game = new Game();
         game.setGameId(source.gameId());
         game.setSchedule(this.scheduleRepository.findById(source.scheduleId()).orElseThrow(() -> new ObjectNotFoundException("schedule", source.scheduleId())));
-        game.setGameDate(source.gameDate());
+        game.setGameDateTime(source.gameDate());
         game.setVenue(source.venue());
         game.setOpponent(source.opponent());
         game.setFinalized(source.finalized());

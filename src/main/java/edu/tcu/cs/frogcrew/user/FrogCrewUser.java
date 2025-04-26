@@ -100,6 +100,10 @@ public class FrogCrewUser implements Serializable {
         this.lastName = lastName;
     }
 
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
     public Role getRole() {
         return role;
     }

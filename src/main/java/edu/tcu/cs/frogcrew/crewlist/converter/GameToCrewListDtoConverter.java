@@ -19,8 +19,8 @@ public class GameToCrewListDtoConverter implements Converter<Game, CrewListDto> 
     public CrewListDto convert(Game source) {
         return new CrewListDto(
                 source.getGameId(),
-                source.getGameDate().toLocalTime(),
-                source.getGameDate().toLocalDate(),
+                source.getGameDateTime().toLocalTime(),
+                source.getGameDateTime().toLocalDate(),
                 source.getVenue(),
                 source.getOpponent(),
                 source.getCrewMembers().stream().map(crewedUserToCrewMemberDtoConverter::convert).toList()

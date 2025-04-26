@@ -5,7 +5,6 @@ import edu.tcu.cs.frogcrew.game.GameRepository;
 import edu.tcu.cs.frogcrew.system.exception.ObjectNotFoundException;
 import edu.tcu.cs.frogcrew.user.FrogCrewUser;
 import edu.tcu.cs.frogcrew.user.FrogCrewUserRepository;
-import edu.tcu.cs.frogcrew.user.dto.FrogCrewedUserDto;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +28,7 @@ public class CrewedUserService {
     public List<FrogCrewUser> findCrewedUsersByAvailabilityAndPosition(Integer gameId, String positionName) {
         Game game = this.gameRepository.findById(gameId).orElseThrow(() -> new ObjectNotFoundException("game", gameId));
 
-        LocalDateTime gameDate = game.getGameDate();
+        LocalDateTime gameDate = game.getGameDateTime();
 
         List<FrogCrewUser> qualifiedUsers = this.frogCrewUserRepository.findFrogCrewUsersByQualifiedPositionsContaining(positionName);
 
@@ -42,7 +41,7 @@ public class CrewedUserService {
         List<CrewedUser> assignments = crewedUserRepository.findByUser(frogCrewUser);
 
         for (CrewedUser crewedUser : assignments) {
-            if (crewedUser.getGame().getGameDate().isEqual(gameTime)) {
+            if (crewedUser.getGame().getGameDateTime().isEqual(gameTime)) {
                 return false;
             }
         }

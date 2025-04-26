@@ -11,6 +11,6 @@ public class GameToGameDtoConverter implements Converter<Game, GameDto> {
 
     @Override
     public GameDto convert(Game source) {
-        return new GameDto(source.getGameId(), source.getSchedule().getId(), source.getGameDate(), source.getVenue(), source.getOpponent(), source.isFinalized());
+        return new GameDto(source.getGameId(), source.getSchedule().getId(), source.getGameDateTime(), source.getVenue(), source.getOpponent(), source.isFinalized());
     }
 }

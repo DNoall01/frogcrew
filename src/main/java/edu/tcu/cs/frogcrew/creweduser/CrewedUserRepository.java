@@ -10,4 +10,8 @@ import java.util.List;
 public interface CrewedUserRepository extends JpaRepository<CrewedUser, Integer> {
     List<CrewedUser> findByUser(FrogCrewUser user);
 
+    CrewedUser findByUser_Id(Integer userId);
+
+    List<CrewedUser> findByGame_GameId(Integer gameId);
+
 }

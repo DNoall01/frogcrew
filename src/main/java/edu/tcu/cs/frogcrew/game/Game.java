@@ -4,7 +4,9 @@ import edu.tcu.cs.frogcrew.creweduser.CrewedUser;
 import edu.tcu.cs.frogcrew.schedule.Schedule;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
@@ -59,12 +61,20 @@ public class Game {
         this.sport = sport;
     }
 
-    public LocalDateTime getGameDate() {
+    public LocalDateTime getGameDateTime() {
         return gameDate;
     }
 
-    public void setGameDate(LocalDateTime gameDate) {
+    public void setGameDateTime(LocalDateTime gameDate) {
         this.gameDate = gameDate;
+    }
+
+    public LocalDate getGameDate() {
+        return gameDate.toLocalDate();
+    }
+
+    public LocalTime getGameTime() {
+        return gameDate.toLocalTime();
     }
 
     public String getVenue() {

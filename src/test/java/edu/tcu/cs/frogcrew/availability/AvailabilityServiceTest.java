@@ -74,7 +74,7 @@ public class AvailabilityServiceTest {
         game.setGameId(1);
         game.setSchedule(schedule);
         game.setSport("Basketball");
-        game.setGameDate(LocalDateTime.of(LocalDate.of(2025, 5, 15), LocalTime.of(12, 0)));
+        game.setGameDateTime(LocalDateTime.of(LocalDate.of(2025, 5, 15), LocalTime.of(12, 0)));
         game.setVenue("Sports Arena");
         game.setOpponent("Team A");
         game.setOpenPositions(Arrays.asList("Coach", "Ref"));
@@ -147,7 +147,7 @@ public class AvailabilityServiceTest {
         game.setGameId(1);
         game.setSchedule(schedule);
         game.setSport("Basketball");
-        game.setGameDate(LocalDateTime.of(LocalDate.of(2025, 5, 15), LocalTime.of(12, 0)));
+        game.setGameDateTime(LocalDateTime.of(LocalDate.of(2025, 5, 15), LocalTime.of(12, 0)));
         game.setVenue("Sports Arena");
         game.setOpponent("Team A");
         game.setOpenPositions(Arrays.asList("Coach", "Ref"));
