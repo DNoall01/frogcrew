@@ -14,4 +14,5 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Integer> {
     @Query("SELECT DISTINCT s.sport FROM Schedule s")
     List<String> findDistinctSports();
 
+    Schedule findScheduleBySeasonAndSport(String season, String sport);
 }

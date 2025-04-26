@@ -49,7 +49,7 @@ public class ExcelReportGenerator {
         }
     }
 
-    public static byte[] generateFinancialReport(String season, String sport) throws IOException {
+    public byte[] generateFinancialReport(String season, String sport) throws IOException {
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Financial Report");
 
@@ -78,7 +78,7 @@ public class ExcelReportGenerator {
         }
     }
 
-    public static byte[] generatePositionReport(String positionId, String season) throws IOException {
+    public byte[] generatePositionReport(Integer positionId, String season) throws IOException {
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Position Report");
 
@@ -103,7 +103,7 @@ public class ExcelReportGenerator {
         }
     }
 
-    public static byte[] generatePositionReportForSport(String positionId, String season, String sport) throws IOException {
+    public byte[] generatePositionReportForSport(Integer positionId, String season, String sport) throws IOException {
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Position Report for Sport");
 
