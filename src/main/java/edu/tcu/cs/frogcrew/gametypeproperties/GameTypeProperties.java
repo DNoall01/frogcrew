@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.time.LocalTime;
+
 @Entity
 public class GameTypeProperties {
 
@@ -18,7 +20,7 @@ public class GameTypeProperties {
 
     private String payRate;
 
-    private String reportTime;
+    private LocalTime reportTime;
 
 
 
@@ -55,11 +57,11 @@ public class GameTypeProperties {
         this.payRate = payRate;
     }
 
-    public String getReportTime() {
+    public LocalTime getReportTime() {
         return reportTime;
     }
 
-    public void setReportTime(String reportTime) {
+    public void setReportTime(LocalTime reportTime) {
         this.reportTime = reportTime;
     }
 }

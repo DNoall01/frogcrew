@@ -40,7 +40,7 @@ public class ScheduleController {
         return new Result(true, StatusCode.SUCCESS, "Add Success", savedGameDto);
     }
 
-    @PostMapping("")
+    @PostMapping
     public Result addSchedule(@Valid @RequestBody ScheduleDto scheduleDto) {
         Schedule schedule = this.scheduleDtoToScheduleConverter.convert(scheduleDto);
         Schedule savedSchedule = this.scheduleService.save(schedule);

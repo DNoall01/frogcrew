@@ -5,7 +5,7 @@ import edu.tcu.cs.frogcrew.position.Position;
 import edu.tcu.cs.frogcrew.user.FrogCrewUser;
 import jakarta.persistence.*;
 
-import javax.annotation.processing.Generated;
+import java.time.LocalTime;
 
 @Entity
 public class CrewedUser {
@@ -14,7 +14,7 @@ public class CrewedUser {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer crewedUserId;
 
-    private String arrivalTime;
+    private LocalTime arrivalTime;
 
     @ManyToOne
     @JoinColumn(name = "game_id", nullable = false)
@@ -44,11 +44,11 @@ public class CrewedUser {
         this.game = game;
     }
 
-    public String getArrivalTime() {
+    public LocalTime getArrivalTime() {
         return arrivalTime;
     }
 
-    public void setArrivalTime(String arrivalTime) {
+    public void setArrivalTime(LocalTime arrivalTime) {
         this.arrivalTime = arrivalTime;
     }
 

@@ -1,9 +1,7 @@
 package edu.tcu.cs.frogcrew.position;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import edu.tcu.cs.frogcrew.gametypeproperties.GameTypeProperties;
+import jakarta.persistence.*;
 
 @Entity
 public class Position {
@@ -15,6 +13,9 @@ public class Position {
     private String positionName;
 
     private String positionLocation;
+
+    @OneToOne
+    GameTypeProperties gameTypeProperties;
 
     public Integer getPositionId() {
         return positionId;
@@ -38,5 +39,13 @@ public class Position {
 
     public void setPositionLocation(String positionLocation) {
         this.positionLocation = positionLocation;
+    }
+
+    public GameTypeProperties getGameTypeProperties() {
+        return gameTypeProperties;
+    }
+
+    public void setGameTypeProperties(GameTypeProperties gameTypeProperties) {
+        this.gameTypeProperties = gameTypeProperties;
     }
 }

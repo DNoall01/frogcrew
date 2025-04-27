@@ -24,13 +24,13 @@ public class PositionController {
         this.positionDtoToPositionConverter = positionDtoToPositionConverter;
     }
 
-    @GetMapping("")
+    @GetMapping
     public Result findAllPositions() {
         List<String> positions = this.positionService.findAllPositionNames();
         return new Result(true, StatusCode.SUCCESS, "Find Success", positions);
     }
 
-    @PostMapping("")
+    @PostMapping
     public Result addPosition(@RequestBody PositionDto positionDto) {
         Position newPosition = this.positionDtoToPositionConverter.convert(positionDto);
         Position savedPosition = this.positionService.save(newPosition);

@@ -6,6 +6,10 @@ public class ObjectNotFoundException extends RuntimeException{
         super("Could not find " + objectName + " with id " + id);
     }
 
+    public ObjectNotFoundException(String objectName, String id) {
+        super("Could not find " + objectName + " with id " + id);
+    }
+
     public ObjectNotFoundException(String objectName, Integer userId, Integer gameId) {
         super("Could not find " + objectName + " for user with id " + userId + " and game with id " + gameId);
     }

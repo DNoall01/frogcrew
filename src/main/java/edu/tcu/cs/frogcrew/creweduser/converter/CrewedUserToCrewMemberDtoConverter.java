@@ -17,7 +17,7 @@ public class CrewedUserToCrewMemberDtoConverter implements Converter<CrewedUser,
                 source.getGame().getGameId(),
                 source.getUser().getFirstName() + " " + source.getUser().getLastName(),
                 source.getPosition().getPositionName(),
-                source.getGame().getGameDateTime().toLocalTime(),
+                source.getPosition().getGameTypeProperties().getReportTime(),
                 source.getPosition().getPositionLocation()
         );
     }

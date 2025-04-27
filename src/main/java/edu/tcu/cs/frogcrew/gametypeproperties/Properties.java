@@ -2,11 +2,13 @@ package edu.tcu.cs.frogcrew.gametypeproperties;
 
 import jakarta.validation.constraints.NotEmpty;
 
+import java.time.LocalTime;
+
 public class Properties {
         @NotEmpty(message = "Pay rate is required") private String payRate;
-        @NotEmpty(message = "Report time is required") private String reportTime;
+        private LocalTime reportTime;
 
-        public Properties(String payRate, String reportTime) {
+        public Properties(String payRate, LocalTime reportTime) {
             this.payRate = payRate;
             this.reportTime = reportTime;
         }
@@ -19,11 +21,11 @@ public class Properties {
             this.payRate = payRate;
         }
 
-        public String getReportTimeProperty() {
+        public LocalTime getReportTimeProperty() {
             return reportTime;
         }
 
-        public void setReportTimeProperty(String reportTime) {
+        public void setReportTimeProperty(LocalTime reportTime) {
             this.reportTime = reportTime;
         }
     }
