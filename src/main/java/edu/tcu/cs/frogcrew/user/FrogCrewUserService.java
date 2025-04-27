@@ -4,6 +4,8 @@ import edu.tcu.cs.frogcrew.system.exception.ObjectNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class FrogCrewUserService {
@@ -17,4 +19,14 @@ public class FrogCrewUserService {
     public FrogCrewUser findById(Integer id) {
         return this.frogCrewUserRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("user", id));
     }
+
+    public FrogCrewUser addCrewMember() {
+        return null;
+    }
+
+    public List<FrogCrewUser> findAll() {
+        return null;
+    }
+
+
 }

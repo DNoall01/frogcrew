@@ -40,6 +40,12 @@ public class ExceptionHandlerAdvice {
         return new Result(false, StatusCode.INVALID_ARGUMENT, "Provided arguments are invalid, see data for details.", map);
     }
 
+    @ExceptionHandler(ObjectAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    Result handleObjectAlreadyExistsException(ObjectAlreadyExistsException ex) {
+        return new Result(false, StatusCode.CONFLICT, ex.getMessage());
+    }
+
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     Result handleOtherException(Exception ex) {

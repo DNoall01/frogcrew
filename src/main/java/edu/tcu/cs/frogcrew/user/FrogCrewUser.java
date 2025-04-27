@@ -22,7 +22,7 @@ public class FrogCrewUser implements Serializable {
     @NotEmpty(message = "password is required.")
     private String password;
 
-    private Integer phoneNumber;
+    private String phoneNumber;
 
     private String firstName;
 
@@ -76,11 +76,11 @@ public class FrogCrewUser implements Serializable {
         this.password = password;
     }
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
