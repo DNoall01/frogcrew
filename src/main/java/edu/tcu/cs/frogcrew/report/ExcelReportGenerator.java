@@ -86,13 +86,10 @@ public class ExcelReportGenerator {
         Row headerRow = sheet.createRow(0);
         headerRow.createCell(0).setCellValue("Position");
         headerRow.createCell(1).setCellValue("Season");
-        headerRow.createCell(2).setCellValue("Total Crew Members");
 
-        // Example data (this should be dynamically retrieved)
         Row dataRow = sheet.createRow(1);
         dataRow.createCell(0).setCellValue(positionId);
         dataRow.createCell(1).setCellValue(season);
-        dataRow.createCell(2).setCellValue(50); // Example number of crew members
 
         // Writing to ByteArrayOutputStream to send as response
         try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {
@@ -112,14 +109,12 @@ public class ExcelReportGenerator {
         headerRow.createCell(0).setCellValue("Position");
         headerRow.createCell(1).setCellValue("Season");
         headerRow.createCell(2).setCellValue("Sport");
-        headerRow.createCell(3).setCellValue("Total Crew Members");
 
         // Example data (this should be dynamically retrieved)
         Row dataRow = sheet.createRow(1);
         dataRow.createCell(0).setCellValue(positionId);
         dataRow.createCell(1).setCellValue(season);
         dataRow.createCell(2).setCellValue(sport);
-        dataRow.createCell(3).setCellValue(10); // Example number of crew members for sport
 
         // Writing to ByteArrayOutputStream to send as response
         try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {

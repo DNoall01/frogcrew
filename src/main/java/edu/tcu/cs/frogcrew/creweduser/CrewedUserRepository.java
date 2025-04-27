@@ -11,6 +11,7 @@ public interface CrewedUserRepository extends JpaRepository<CrewedUser, Integer>
     List<CrewedUser> findByUser(FrogCrewUser user);
 
     CrewedUser findByUser_Id(Integer userId);
+    List<CrewedUser> findCrewedUsersByUser_Id(Integer userId);
 
     List<CrewedUser> findByGame_GameId(Integer gameId);
 
