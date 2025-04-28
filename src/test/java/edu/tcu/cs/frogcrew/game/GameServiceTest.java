@@ -53,7 +53,7 @@ public class GameServiceTest {
         g1.setVenue("Amon G. Carter Stadium");
         g1.setOpponent("Texas Longhorns");
         g1.setFinalized(true);
-        g1.setOpenPositions(List.of("Usher", "Gate Keeper"));
+        g1.setPositions(List.of("Usher", "Gate Keeper"));
 
         // Create mock game 2
         g2 = new Game();
@@ -64,7 +64,7 @@ public class GameServiceTest {
         g2.setVenue("Amon G. Carter Stadium");
         g2.setOpponent("Oklahoma Sooners");
         g2.setFinalized(false);
-        g2.setOpenPositions(List.of("Ticket Checker"));
+        g2.setPositions(List.of("Ticket Checker"));
 
         // Add games to schedule
         s1.setGames(List.of(g1, g2));

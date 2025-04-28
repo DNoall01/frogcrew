@@ -79,7 +79,7 @@ public class GameControllerTest {
         g1.setOpponent("Oklahoma Sooners");
         g1.setSchedule(s1);
         g1.setFinalized(false);
-        g1.setOpenPositions(List.of("Camera", "Sound", "Replay"));
+        g1.setPositions(List.of("Camera", "Sound", "Replay"));
 
         g2 = new Game();
         g2.setGameId(102);
@@ -89,7 +89,7 @@ public class GameControllerTest {
         g2.setOpponent("Baylor Bears");
         g2.setSchedule(s1);
         g2.setFinalized(true);
-        g2.setOpenPositions(List.of());
+        g2.setPositions(List.of());
 
         g3 = new Game();
         g3.setGameId(103);
@@ -99,7 +99,7 @@ public class GameControllerTest {
         g3.setOpponent("Kansas Jayhawks");
         g3.setSchedule(s2);
         g3.setFinalized(false);
-        g3.setOpenPositions(List.of("Camera", "Lighting"));
+        g3.setPositions(List.of("Camera", "Lighting"));
 
         g4 = new Game();
         g4.setGameId(104);
@@ -109,7 +109,7 @@ public class GameControllerTest {
         g4.setOpponent("Texas Tech");
         g4.setSchedule(s2);
         g4.setFinalized(true);
-        g4.setOpenPositions(List.of());
+        g4.setPositions(List.of());
 
         games = new ArrayList<>();
         games.add(g1);

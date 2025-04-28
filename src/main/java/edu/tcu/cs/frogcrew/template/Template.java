@@ -32,4 +32,12 @@ public class Template {
     public void setTemplateName(String templateName) {
         this.templateName = templateName;
     }
+
+    public String getGameType() {
+        return gameType;
+    }
+
+    public void setGameType(String gameType) {
+        this.gameType = gameType;
+    }
 }

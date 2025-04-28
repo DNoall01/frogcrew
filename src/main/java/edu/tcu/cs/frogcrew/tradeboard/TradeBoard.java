@@ -21,7 +21,7 @@ public class TradeBoard {
     private FrogCrewUser receiver;
 
     @ManyToOne
-    @JoinColumn(name = "gameid", nullable = false)
+    @JoinColumn(name = "gameId", nullable = false)
     private Game game;
 
     @ManyToOne

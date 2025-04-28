@@ -5,6 +5,7 @@ import edu.tcu.cs.frogcrew.availability.dto.AvailabilityGameDto;
 import edu.tcu.cs.frogcrew.game.Game;
 import edu.tcu.cs.frogcrew.game.GameRepository;
 import edu.tcu.cs.frogcrew.schedule.Schedule;
+import edu.tcu.cs.frogcrew.system.DBDataInitializer;
 import edu.tcu.cs.frogcrew.system.StatusCode;
 import edu.tcu.cs.frogcrew.system.exception.ObjectNotFoundException;
 import edu.tcu.cs.frogcrew.user.FrogCrewUser;
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -39,6 +41,9 @@ public class AvailabilityControllerTest {
     AvailabilityService availabilityService;
 
     @MockitoBean
+    DBDataInitializer dbDataInitializer;
+
+    @MockitoBean
     FrogCrewUserRepository frogCrewUserRepository;
 
     @MockitoBean
@@ -50,12 +55,12 @@ public class AvailabilityControllerTest {
     @Value("/api/v1")
     String baseUrl;
 
-    private AvailabilityGameDto availabilityGameDto;
-    private Availability availability;
-    private AvailabilityId availabilityId;
-    private FrogCrewUser user;
-    private Game game;
-    private Schedule schedule;
+    AvailabilityGameDto availabilityGameDto;
+    Availability availability;
+    AvailabilityId availabilityId;
+    FrogCrewUser user;
+    Game game;
+    Schedule schedule;
 
     @BeforeEach
     void setUp() {
@@ -91,6 +96,7 @@ public class AvailabilityControllerTest {
 
     @Test
     void testAddAvailabilitySuccess() throws Exception {
+        given(this.gameRepository.save(Mockito.any(Game.class))).willReturn(game);
         given(this.availabilityService.save(Mockito.any(Availability.class))).willReturn(availability);
         given(this.frogCrewUserRepository.findById(1)).willReturn(Optional.of(user));
         given(this.gameRepository.findById(1)).willReturn(Optional.of(game));

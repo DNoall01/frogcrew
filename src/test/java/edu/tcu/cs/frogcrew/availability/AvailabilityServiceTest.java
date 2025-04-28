@@ -62,8 +62,8 @@ public class AvailabilityServiceTest {
         user.setLastName("Smith");
         user.setEmail("john.smith@gmail.com");
         user.setPassword("password");
-        user.setRole(Role.CREW_MEMBER);
-        user.setPhoneNumber(123456789);
+        user.setRole(Role.CREW);
+        user.setPhoneNumber("123456789");
         user.setPayRate("10.00");
 
         schedule = new Schedule();
@@ -77,7 +77,7 @@ public class AvailabilityServiceTest {
         game.setGameDateTime(LocalDateTime.of(LocalDate.of(2025, 5, 15), LocalTime.of(12, 0)));
         game.setVenue("Sports Arena");
         game.setOpponent("Team A");
-        game.setOpenPositions(Arrays.asList("Coach", "Ref"));
+        game.setPositions(Arrays.asList("Coach", "Ref"));
 
         availability = new Availability();
         availabilityId = new AvailabilityId();
@@ -135,8 +135,8 @@ public class AvailabilityServiceTest {
         user.setLastName("Smith");
         user.setEmail("john.smith@gmail.com");
         user.setPassword("password");
-        user.setRole(Role.CREW_MEMBER);
-        user.setPhoneNumber(123456789);
+        user.setRole(Role.CREW);
+        user.setPhoneNumber("123456789");
         user.setPayRate("10.00");
 
         Schedule schedule = new Schedule();
@@ -150,7 +150,7 @@ public class AvailabilityServiceTest {
         game.setGameDateTime(LocalDateTime.of(LocalDate.of(2025, 5, 15), LocalTime.of(12, 0)));
         game.setVenue("Sports Arena");
         game.setOpponent("Team A");
-        game.setOpenPositions(Arrays.asList("Coach", "Ref"));
+        game.setPositions(Arrays.asList("Coach", "Ref"));
 
         Availability availability = new Availability();
         AvailabilityId availabilityId = new AvailabilityId();

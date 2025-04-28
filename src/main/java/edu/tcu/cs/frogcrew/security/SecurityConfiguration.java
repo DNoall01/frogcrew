@@ -1,0 +1,95 @@
+package edu.tcu.cs.frogcrew.security;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+@Configuration
+public class SecurityConfiguration {
+
+    @Value("${api.endpoint.base-url}")
+    private String baseUrl;
+
+    /* URL Path Authorization
+    /crewMember/**                      ROLE_CREW_MEMBER, ROLE_ADMIN
+    /availability/**                    ROLE_CREW_MEMBER, ROLE_ADMIN
+    /games/** (view)                    ROLE_CREW_MEMBER, ROLE_ADMIN
+    /games/** (edit, create, publish)   ROLE_ADMIN
+    /notifications/**                   ROLE_CREW_MEMBER, ROLE_ADMIN
+    /positions/**                       ROLE_ADMIN,
+    /templates/**                       ROLE_ADMIN,
+    /reports/**                         ROLE_ADMIN
+    */
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http
+                .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
+                        // Crew Member Endpoints
+                        .requestMatchers(HttpMethod.GET, this.baseUrl + "/crewMember/{userId}").hasAuthority("ROLE_CREW") // Use Case 3
+                        .requestMatchers(HttpMethod.POST, this.baseUrl + "/crewMember").hasAuthority("ROLE_CREW") // Use Case 1
+                        .requestMatchers(HttpMethod.PUT, this.baseUrl + "/crewMember/{userId}").hasAuthority("ROLE_CREW") // Use Case 2, 19
+                        .requestMatchers(HttpMethod.GET, this.baseUrl + "/crewMember/{userId}/schedule/{scheduleId}").hasAuthority("ROLE_CREW") // Use Case 4
+                        .requestMatchers(HttpMethod.GET, this.baseUrl + "/crewSchedule/{gameId}").hasAuthority("ROLE_CREW") // Use Case 5
+                        .requestMatchers(HttpMethod.GET, this.baseUrl + "/crewList/{gameId}").hasAuthority("ROLE_CREW") // Use Case 6
+                        .requestMatchers(HttpMethod.POST, this.baseUrl + "/availability").hasAuthority("ROLE_CREW") // Use Case 7
+                        .requestMatchers(HttpMethod.PUT, this.baseUrl + "/availability").hasAuthority("ROLE_CREW") // Use Case 8
+                        .requestMatchers(HttpMethod.PUT, this.baseUrl + "/scheduledGames/pickup/{tradeId}/{userId}").hasAuthority("ROLE_CREW") // Use Case 9
+                        .requestMatchers(HttpMethod.PUT, this.baseUrl + "/scheduledGames/approve/{tradeId}").hasAuthority("ROLE_CREW") // Use Case 10
+                        .requestMatchers(HttpMethod.PUT, this.baseUrl + "/scheduledGames/deny/{tradeId}").hasAuthority("ROLE_CREW") // Use Case 10
+                        .requestMatchers(HttpMethod.GET, this.baseUrl + "/notifications/{userId}").hasAuthority("ROLE_CREW") // Use Case 12
+                        .requestMatchers(HttpMethod.DELETE, this.baseUrl + "/notifications/{notificationId}").hasAuthority("ROLE_CREW") // Use Case 13
+                        .requestMatchers(HttpMethod.GET, this.baseUrl + "/scheduledGames/get/{userId}").hasAuthority("ROLE_CREW") // Use Case 4
+                        .requestMatchers(HttpMethod.POST, this.baseUrl + "/auth/login").permitAll() // Use Case 14
+
+                        // Admin Endpoints
+                        .requestMatchers(HttpMethod.POST, this.baseUrl + "/Admin/UpdateGameTimes").hasAuthority("ROLE_ADMIN") // Use Case 18
+                        .requestMatchers(HttpMethod.POST, this.baseUrl + "/Admin/RefreshTestData").hasAuthority("ROLE_ADMIN") // Use Case 18
+                        .requestMatchers(HttpMethod.POST, this.baseUrl + "/AdminClearTestData").hasAuthority("ROLE_ADMIN") // Use Case 18
+                        .requestMatchers(HttpMethod.GET, this.baseUrl + "/report/crewMember/{userId}/{season}").hasAuthority("ROLE_ADMIN") // Use Case 26
+                        .requestMatchers(HttpMethod.GET, this.baseUrl + "/report/financial/{season}/{sport}").hasAuthority("ROLE_ADMIN") // Use Case 26
+                        .requestMatchers(HttpMethod.GET, this.baseUrl + "/report/position/{positionId}/{season}").hasAuthority("ROLE_ADMIN") // Use Case 27
+                        .requestMatchers(HttpMethod.GET, this.baseUrl + "/report/position/{positionId}/{season}/{sport}").hasAuthority("ROLE_ADMIN") // Use Case 27
+                        .requestMatchers(HttpMethod.GET, this.baseUrl + "/positions").hasAuthority("ROLE_ADMIN") // Use Case 29
+                        .requestMatchers(HttpMethod.POST, this.baseUrl + "/positions").hasAuthority("ROLE_ADMIN") // Use Case 29
+                        .requestMatchers(HttpMethod.PUT, this.baseUrl + "/positions/{positionId}").hasAuthority("ROLE_ADMIN") // Use Case 30
+                        .requestMatchers(HttpMethod.GET, this.baseUrl + "/positions/properties/{gameType}").hasAuthority("ROLE_ADMIN") // Use Case 31
+                        .requestMatchers(HttpMethod.GET, this.baseUrl + "/template").hasAuthority("ROLE_ADMIN") // Use Case 32
+                        .requestMatchers(HttpMethod.GET, this.baseUrl + "/template/{templateId}").hasAuthority("ROLE_ADMIN") // Use Case 34
+                        .requestMatchers(HttpMethod.POST, this.baseUrl + "/template").hasAuthority("ROLE_ADMIN") // Use Case 32
+                        .requestMatchers(HttpMethod.PUT, this.baseUrl + "/template/{templateId}").hasAuthority("ROLE_ADMIN") // Use Case 35
+                        .requestMatchers(HttpMethod.DELETE, this.baseUrl + "/template/{templateId}").hasAuthority("ROLE_ADMIN") // Use Case 36
+                        .requestMatchers(HttpMethod.GET, this.baseUrl + "/crewList/export/{gameId}").hasAuthority("ROLE_ADMIN") // Use Case 5
+                        .requestMatchers(HttpMethod.POST, this.baseUrl + "/admin/invite").hasAuthority("ROLE_ADMIN") // Use Case 14
+                        .requestMatchers(HttpMethod.GET, this.baseUrl + "/crewMember").hasAuthority("ROLE_ADMIN") // Use Case 16
+                        .requestMatchers(HttpMethod.PUT, this.baseUrl + "/crewMember/disable/{userId}").hasAuthority("ROLE_ADMIN") // Use Case 15
+                        .requestMatchers(HttpMethod.GET, this.baseUrl + "/crewMember/{userId}/availability").hasAuthority("ROLE_ADMIN") // Use Case 17
+                        .requestMatchers(HttpMethod.GET, this.baseUrl + "/gameSchedule/games").hasAuthority("ROLE_ADMIN") // Use Case 5
+                        .requestMatchers(HttpMethod.POST, this.baseUrl + "/gameSchedule").hasAuthority("ROLE_ADMIN") // Use Case 18
+                        .requestMatchers(HttpMethod.PUT, this.baseUrl + "/gameSchedule").hasAuthority("ROLE_ADMIN") // Use Case 21
+                        .requestMatchers(HttpMethod.GET, this.baseUrl + "/gameSchedule/season/{season}").hasAuthority("ROLE_ADMIN") // Use Case 5
+                        .requestMatchers(HttpMethod.PUT, this.baseUrl + "/gameSchedule/publish/{scheduleId}").hasAuthority("ROLE_ADMIN") // Use Case 24
+                        .requestMatchers(HttpMethod.POST, this.baseUrl + "/gameSchedule/{scheduleId}/games").hasAuthority("ROLE_ADMIN") // Use Case 20
+                        .requestMatchers(HttpMethod.GET, this.baseUrl + "/admin").hasAuthority("ROLE_ADMIN") // Admin dashboard
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
+                        .anyRequest().authenticated()
+                )
+                .headers(headers -> headers.frameOptions(Customizer.withDefaults()).disable())
+                .csrf(csrf -> csrf.disable())
+                .httpBasic(Customizer.withDefaults())
+                .build();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(12);
+    }
+
+}

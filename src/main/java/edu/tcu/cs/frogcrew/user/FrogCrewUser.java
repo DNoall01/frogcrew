@@ -14,7 +14,10 @@ public class FrogCrewUser implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id")
     private Integer userId;
+
+    String username;
 
     @NotEmpty(message = "email is required.")
     private String email;
@@ -30,6 +33,8 @@ public class FrogCrewUser implements Serializable {
 
     @NotNull(message = "roles are required.")
     private Role role;
+
+    private boolean enabled;
 
     @ElementCollection
     private List<String> qualifiedPositions;
@@ -58,6 +63,14 @@ public class FrogCrewUser implements Serializable {
 
     public void setId(Integer id) {
         this.userId = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public @NotEmpty(message = "email is required.") String getEmail() {
@@ -126,5 +139,21 @@ public class FrogCrewUser implements Serializable {
 
     public void setPayRate(String payRate) {
         this.payRate = payRate;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public Availability getAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(Availability availability) {
+        this.availability = availability;
     }
 }

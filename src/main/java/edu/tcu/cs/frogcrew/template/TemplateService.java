@@ -33,6 +33,7 @@ public class TemplateService {
         return this.templateRepository.findById(templateId)
                 .map(template -> {
                     template.setTemplateName(update.getTemplateName());
+                    template.setGameType(update.getGameType());
                     return this.templateRepository.save(template);
                 }).orElseThrow(() -> new ObjectNotFoundException("template", templateId));
     }

@@ -11,12 +11,12 @@ public class Availability {
     @EmbeddedId
     private AvailabilityId id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("userId") // maps to userId in embeddedId
     @JoinColumn(name = "user_id")
     private FrogCrewUser frogCrewUser;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("gameId") // maps to gameId in embeddedId
     @JoinColumn(name = "game_id")
     private Game game;

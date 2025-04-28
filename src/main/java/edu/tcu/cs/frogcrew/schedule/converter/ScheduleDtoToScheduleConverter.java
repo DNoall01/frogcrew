@@ -12,7 +12,7 @@ public class ScheduleDtoToScheduleConverter implements Converter<ScheduleDto, Sc
     @Override
     public Schedule convert(ScheduleDto source) {
         Schedule schedule = new Schedule();
-        schedule.setId(source.id());
+        if (source.id() != null) schedule.setId(source.id());
         schedule.setSeason(source.season());
         schedule.setSport(source.sport());
         return schedule;

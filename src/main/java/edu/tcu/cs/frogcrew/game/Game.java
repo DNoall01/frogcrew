@@ -16,13 +16,13 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int gameId;
 
-    @ManyToOne
-    @JoinColumn(name = "schedule_id", nullable = false)
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "schedule_id")
     private Schedule schedule;
 
     private String sport;
 
-    private LocalDateTime gameDate;
+    private LocalDateTime gameDateTime;
 
     private String venue;
 
@@ -31,10 +31,10 @@ public class Game {
     private boolean finalized = false;
 
     @ElementCollection
-    private List<String> openPositions;
+    private List<String> positions;
 
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<CrewedUser> crewMembers;
 
     public int getGameId() {
@@ -62,19 +62,19 @@ public class Game {
     }
 
     public LocalDateTime getGameDateTime() {
-        return gameDate;
+        return gameDateTime;
     }
 
     public void setGameDateTime(LocalDateTime gameDate) {
-        this.gameDate = gameDate;
+        this.gameDateTime = gameDate;
     }
 
     public LocalDate getGameDate() {
-        return gameDate.toLocalDate();
+        return gameDateTime.toLocalDate();
     }
 
     public LocalTime getGameTime() {
-        return gameDate.toLocalTime();
+        return gameDateTime.toLocalTime();
     }
 
     public String getVenue() {
@@ -93,12 +93,12 @@ public class Game {
         this.opponent = opponent;
     }
 
-    public List<String> getOpenPositions() {
-        return openPositions;
+    public List<String> getPositions() {
+        return positions;
     }
 
-    public void setOpenPositions(List<String> openPositions) {
-        this.openPositions = openPositions;
+    public void setPositions(List<String> openPositions) {
+        this.positions = openPositions;
     }
 
     public boolean isFinalized() {
